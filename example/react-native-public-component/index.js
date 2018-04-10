@@ -256,7 +256,7 @@ class PublicCompoennt extends Component{
         hiddenTopLine : true,
         hiddenLeft: false,
         hiddenRight:false,
-        removeCenterView: true,
+        removeCenterView: false,
         removeLeftView: false,
         removeRightView: false,
         topLineLeftMargin: 0,
@@ -342,7 +342,7 @@ class PublicCompoennt extends Component{
                 }
                 <IsTouchComponent style={[styles.contentStyle]} onPress={this.props.onPress}>
                     {this.props.removeLeftView ? null : this.props.leftComponent || this.renderLeft()}
-                    {this.props.removeCenterView ? null : this.props.centerContent || this.renderCneter()}
+                    {this.props.removeCenterView ? null : this.props.centerText ? this.renderCneter() : this.props.centerContent }
                     {this.props.removeRightView ? null : this.props.rightComponent || this.renderRight()}
                 </IsTouchComponent>
                 {

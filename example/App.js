@@ -75,7 +75,23 @@ export default class App extends Component<Props> {
         />
 
         <PublicCompoennt leftText="账号" rightComponent={this.rightLogin()} />
+          
+        <PublicCompoennt leftText="左侧" centerText="中间" rightText="右侧" containerStyle={styles.mv10} />
 
+        <PublicCompoennt 
+          leftText="左侧"  
+          rightText="右侧"
+          centerText="中间" 
+          leftTextStyle={styles.leftTextStyle}
+          rightTextStyle={styles.leftTextStyle}
+          rightIcon={require('./images/head_default.png')}
+          leftIcon={require('./images/head_default.png')}
+          isRightArrowShow={false} 
+          hiddenBottomLine={true}
+          leftIconStyle={styles.rightIconStyle1}
+          rightIconStyle={styles.rightIconStyle1}
+          containerStyle={styles.mv10} 
+        />
       </ScrollView>
     );
 
@@ -105,7 +121,7 @@ const styles = StyleSheet.create({
     flex:2
   },
   mv10:{
-    marginVertical: 10,
+    marginTop:  4,
   },
   leftTextStyle:{
     fontSize: dimens.normalize(12),
