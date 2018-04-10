@@ -13,7 +13,7 @@
     "escapedName": "react-native-public-component",
     "rawSpec": "^1.0.2",
     "saveSpec": null,
-    "fetchSpec": "^1.0.2"
+    "fetchSpec": "^1.0.4"
   },
   "_requiredBy": [
     "#USER",
