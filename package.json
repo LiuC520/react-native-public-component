@@ -1,0 +1,11 @@
+{
+  "name": "react-native-public-component",
+  "version": "1.0.2",
+  "description": "public component for react native",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Liu Cheng",
+  "license": "MIT"
+}
