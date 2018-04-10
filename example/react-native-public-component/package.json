@@ -1,0 +1,39 @@
+{
+  "_from": "react-native-public-component@^1.0.2",
+  "_id": "react-native-public-component@1.0.2",
+  "_inBundle": false,
+  "_integrity": "sha512-Mej73/xGdf1q0Gd+mjOSdgyVWeQ0WBNNUlI1qCy4UJkHu3RP6FY/sfMVN2koGImfGqfP8GNzdEJBTkvwS1SkZw==",
+  "_location": "/react-native-public-component",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "range",
+    "registry": true,
+    "raw": "react-native-public-component@^1.0.2",
+    "name": "react-native-public-component",
+    "escapedName": "react-native-public-component",
+    "rawSpec": "^1.0.2",
+    "saveSpec": null,
+    "fetchSpec": "^1.0.2"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/react-native-public-component/-/react-native-public-component-1.0.2.tgz",
+  "_shasum": "0f1395eb4a9a036fdb327f5e56d8d56e80b5b0d8",
+  "_spec": "react-native-public-component@^1.0.2",
+  "_where": "/Users/vittorio/Desktop/kaifa/rn/npm/react-native-public-component/example",
+  "author": {
+    "name": "Liu Cheng"
+  },
+  "bundleDependencies": false,
+  "deprecated": false,
+  "description": "public component for react native",
+  "license": "MIT",
+  "main": "index.js",
+  "name": "react-native-public-component",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "1.0.2"
+}

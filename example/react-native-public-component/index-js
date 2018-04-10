@@ -1,0 +1,239 @@
+/**
+ * author: liucheng 
+ * e-mail: 674668211@qq.com
+ * instructions: 此页面为公共组件，左侧可以为图片 文字 ，右侧为文字 输入框 箭头
+ *               可以自定义左侧点击事件、右侧点击事件、显示左侧图片、显示右侧图片、右侧箭头
+ *               可以自定义样式
+ */
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
+import {
+    Platform,
+    StyleSheet,
+    Text,
+    Image,
+    View,
+    TouchableOpacity
+} from 'react-native';
+
+import  dimens  from './dimens';
+
+const barBtnWidth = 40;
+
+const CommonItem = (props) => {
+    const {
+        containerStyle,//整个容器的样式，可以设置padding、margin、背景颜色等等
+        leftComponent,//左侧组件-自定义
+        centerContent,//中间组件-自定义
+        rightComponent,//右侧组件-自定义
+        leftComponentStyle,//左侧组件样式
+        centerContentStyle,//中间组件样式
+        rightComponentStyle,//右侧组件样式
+        leftIcon,//左侧图标
+        rightIcon,//右侧图标
+        rightArrow,//右侧箭头
+        rightArrowStyle,//右侧箭头样式
+        isRightArrowShow,//是否显示右侧箭头
+        leftIconStyle,//左侧图标样式
+        rightIconStyle,//右侧图标样式
+        leftText,//左侧文字
+        leftTextStyle,//左侧文字样式
+        centerText,//中间文字
+        centerTextStyle,//中间文字样式
+        rightText,//右侧文字
+        rightTextStyle,//右侧文字样式
+        onPress,//整个item点击
+        onLeftPress,//左侧点击
+        onRightPress,//右侧点击
+        onCenterPress,//中间点击
+        hiddenLeft,//隐藏左侧
+        hiddenRight,//隐藏右侧
+        removeLeftView,//移除左侧组件
+        removeCenterView,//移除中间组件
+        removeRightView,//移除右侧组件
+        hiddenTopLine,//隐藏上划线
+        topLineStyle,//上划线的样式
+        topLineLeftMargin,//上传划线左侧边距
+        topLineRightMargin,//上划线右侧边距
+        hiddenBottomLine,//隐藏下划线
+        bottomLineStyle,//底部下划线的样式
+        bottomLineLeftMargin,//底部下划线左侧边距
+        bottomLineRightMargin,//底部下划线右侧边距
+    } = props;
+
+    /**
+     * 左边内容
+     */
+    const renderLeft = () => {
+        let component;
+        if (hiddenLeft) {
+            return(
+              <View style={{width: barBtnWidth}}/>
+            )
+        }
+        component = (
+            <View style={[styles.leftComponentStyle, leftComponentStyle]}>
+                {
+                    leftIcon ? <Image  style={[styles.leftIconStyle, leftIconStyle]} source={leftIcon}/>:null
+                }
+                {
+                    leftText ?  <Text numberOfLines={1} style={[styles.leftTextStyle, leftTextStyle]}> {leftText} </Text> : null
+                }
+            </View>
+        )
+        let IsTouchComponent = onLeftPress  ? TouchableOpacity : View;
+        
+        return (
+            <IsTouchComponent style={[{flex:1},leftComponentStyle]} hitSlop={{top:13,bottom: 13, left: 0,right: 0}}  onPress={onLeftPress}>
+                {component} 
+            </IsTouchComponent>
+        )
+    }
+
+    const renderCneter = () => {
+        const IsTouchComponent = onCenterPress  ? TouchableOpacity : View;
+        
+        return (
+          <IsTouchComponent style={[styles.centerContentStyle,{flex: 2}, centerContentStyle]} onPress={onCenterPress}>
+            <Text style={[styles.centerTextStyle, centerTextStyle]} ellipsizeMode="head" numberOfLines={1}>
+              { centerText }
+            </Text>
+          </IsTouchComponent>
+        );
+    };
+    const renderRight = () => {
+        let component;
+        if (hiddenRight) {
+            return(
+                <View style={{width: barBtnWidth}}/>
+            )
+        }
+        component = (
+            <View style={[styles.rightComponentStyle, rightComponentStyle]}>
+                {
+                    rightIcon ? <Image  style={[styles.rightIconStyle, rightIconStyle]} source={rightIcon}/>:null
+                }
+                {
+                    rightText ?  <Text numberOfLines={1} style={[styles.rightTextStyle, rightTextStyle]}>{rightText}</Text> : null
+                }
+                {
+                    isRightArrowShow  ? <Image style={[styles.rightArrowStyle,rightArrowStyle]} source={rightArrow || require('./rightArrow.png')}/> : null
+                }
+            </View>
+        )
+            
+        let IsTouchComponent = onRightPress ? TouchableOpacity : View;
+    
+        return (
+            <IsTouchComponent style={[{flex:1},rightComponentStyle]} hitSlop={{top:13,bottom: 13, left: 0,right: 16}}  onPress={onRightPress}>
+                {component} 
+            </IsTouchComponent>
+        )
+    }
+    let IsTouchComponent = onPress  ? TouchableOpacity : View;
+    console.log(bottomLineLeftMargin)
+    return (
+        <View style={[styles.container,containerStyle]}>
+            {
+                hiddenTopLine ? null : <View style={[styles.topLine, topLineStyle]}/>
+            }
+            <IsTouchComponent style={[styles.contentStyle]} onPress={onPress}>
+                {removeLeftView ? null : leftComponent || renderLeft()}
+                {removeCenterView ? null : centerContent || renderCneter()}
+                { removeRightView ? null : rightComponent || renderRight()}
+            </IsTouchComponent>
+            {
+                hiddenBottomLine ? null : <View style={[styles.bottomLine,{marginLeft: bottomLineLeftMargin || 15, marginRight: bottomLineRightMargin || 0}, bottomLineStyle]}/>
+            }
+        </View>
+    )
+}
+
+const styles = StyleSheet.create({
+    container:{
+        backgroundColor: 'white',
+        width: dimens.width
+    },
+    topLine: {
+        borderTopWidth: dimens.SEPARATOR_HEIGHT,
+        borderTopColor: 'gray',
+    },
+    bottomLine: {
+        borderBottomWidth: dimens.SEPARATOR_HEIGHT,
+        borderBottomColor:  'gray',
+    },
+    contentStyle:{
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
+    leftComponentStyle: {
+        flexDirection: 'row',
+        paddingLeft: 16,
+        paddingVertical: 12,
+        alignItems:'center',
+    },
+    leftIconStyle: {
+        width: 20,
+        height: 20,
+        resizeMode: 'contain',
+        marginRight: 5,
+    },
+    leftTextStyle: {
+        fontSize: dimens.normalize(16),
+        color: 'black'
+    },
+    centerContentStyle: {
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    centerTextStyle: {
+        fontSize: dimens.normalize(16),
+        color: 'black',
+        textAlign: 'center',
+        fontWeight: 'bold'
+    },
+
+    rightComponentStyle: {
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
+        paddingRight: 16,
+        paddingVertical: 13,
+        alignItems:'center',
+    },
+    rightIconStyle: {
+        width: 20,
+        height: 20,
+        resizeMode: 'contain',
+        marginRight: 5,
+    },
+    rightTextStyle: {
+        fontSize: dimens.normalize(16),
+        color: 'black'
+    },
+    rightArrowStyle:{
+        width: 8,
+        height: 14,
+        resizeMode:'contain',
+        marginLeft: 5,
+    },
+});
+
+CommonItem.prototype={
+
+}
+CommonItem.defaultProps = {
+    isRightArrowShow: true,
+    hiddenBottomLine: false,
+    hiddenTopLine : true,
+    hiddenLeft: false,
+    hiddenRight:false,
+    removeCenterView: true,
+    removeLeftView: false,
+    removeRightView: false,
+    topLineLeftMargin: 0,
+    bottomLineLeftMargin: 15
+}
+export {
+    CommonItem,
+    dimens
+}
