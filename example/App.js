@@ -14,7 +14,7 @@ import {
   ScrollView
 } from 'react-native';
 
-import {PublicCompoennt, dimens} from './react-native-public-component'
+import {PublicCompoennt, dimens} from 'react-native-public-component'
 
 type Props = {};
 export default class App extends Component<Props> {
