@@ -4,7 +4,7 @@
 项目中有两个文件，一个是公用组件，一个是字体大小适配
 
 简书具体使用说明：https://www.jianshu.com/p/941189bd7bb0
- ![示例](https://github.com/LiuC520/react-native-public-component/tree/master/example/example.png)
+ ![示例](https://github.com/LiuC520/react-native-public-component/blob/master/example/example.png)
 #### npm install --save react-native-public-component
 #### 项目中导入 
 import {PublicCompoennt, dimens} from 'react-native-public-component'

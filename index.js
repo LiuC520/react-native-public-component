@@ -277,10 +277,10 @@ class PublicCompoennt extends Component{
         component = (
             <View style={[styles.leftComponentStyle, this.props.leftComponentStyle]}>
                 {
-                    this.props.leftIcon ? <Image  style={[styles.leftIconStyle, this.props.leftIconStyle]} source={this.props.leftIcon}/>:null
+                    this.props.leftIcon && <Image  style={[styles.leftIconStyle, this.props.leftIconStyle]} source={this.props.leftIcon}/>
                 }
                 {
-                    this.props.leftText ?  <Text  style={[styles.leftTextStyle, this.props.leftTextStyle]}> {this.props.leftText} </Text> : null
+                    this.props.leftText &&  <Text  style={[styles.leftTextStyle, this.props.leftTextStyle]}> {this.props.leftText} </Text> 
                 }
             </View>
         )
@@ -314,13 +314,13 @@ class PublicCompoennt extends Component{
         component = (
             <View style={[styles.rightComponentStyle, this.props.rightComponentStyle]}>
                 {
-                    this.props.rightIcon ? <Image  style={[styles.rightIconStyle, this.props.rightIconStyle]} source={this.props.rightIcon}/>:null
+                    this.props.rightIcon && <Image  style={[styles.rightIconStyle, this.props.rightIconStyle]} source={this.props.rightIcon}/>
                 }
                 {
-                    this.props.rightText ?  <Text style={[styles.rightTextStyle, this.props.rightTextStyle]}>{this.props.rightText}</Text> : null
+                    this.props.rightText &&  <Text style={[styles.rightTextStyle, this.props.rightTextStyle]}>{this.props.rightText}</Text> 
                 }
                 {
-                    this.props.isRightArrowShow  ? <Image style={[styles.rightArrowStyle, this.props.rightArrowStyle]} source={this.props.rightArrow || require('./rightArrow.png')}/> : null
+                    this.props.isRightArrowShow  && <Image style={[styles.rightArrowStyle, this.props.rightArrowStyle]} source={this.props.rightArrow || require('./rightArrow.png')}/> 
                 }
             </View>
         )
@@ -338,15 +338,15 @@ class PublicCompoennt extends Component{
         return (
             <View style={[styles.container, this.props.containerStyle]}>
                 {
-                    this.props.hiddenTopLine ? null : <View style={[styles.topLine, {marginLeft:  this.props.topLineLeftMargin, marginRight: this.props.topLineRightMargin}, this.props.topLineStyle]}/>
+                   !this.props.hiddenTopLine &&  <View style={[styles.topLine, {marginLeft:  this.props.topLineLeftMargin, marginRight: this.props.topLineRightMargin}, this.props.topLineStyle]}/>
                 }
                 <IsTouchComponent style={[styles.contentStyle]} onPress={this.props.onPress}>
-                    {this.props.removeLeftView ? null : this.props.leftComponent || this.renderLeft()}
-                    {this.props.removeCenterView ? null : this.props.centerText ? this.renderCneter() : this.props.centerContent }
-                    {this.props.removeRightView ? null : this.props.rightComponent || this.renderRight()}
+                    { !this.props.removeLeftView && (this.props.leftComponent || this.renderLeft())}
+                    {!this.props.removeCenterView && (this.props.centerText ? this.renderCneter() : this.props.centerContent) }
+                    {!this.props.removeRightView && (this.props.rightComponent || this.renderRight())}
                 </IsTouchComponent>
                 {
-                    this.props.hiddenBottomLine ? null : <View style={[styles.bottomLine, {marginLeft:  this.props.bottomLineLeftMargin, marginRight: this.props.bottomLineRightMargin}, this.props.bottomLineStyle]}/>
+                    !this.props.hiddenBottomLine && <View style={[styles.bottomLine, {marginLeft:  this.props.bottomLineLeftMargin, marginRight: this.props.bottomLineRightMargin}, this.props.bottomLineStyle]}/>
                 }
             </View>
         )
