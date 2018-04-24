@@ -359,12 +359,12 @@ const styles = StyleSheet.create({
         width: dimens.width
     },
     topLine: {
-        borderTopWidth: dimens.SEPARATOR_HEIGHT,
-        borderTopColor: 'gray',
+        height: dimens.SEPARATOR_HEIGHT,
+        backgroundColor: 'gray',
     },
     bottomLine: {
-        borderBottomWidth: dimens.SEPARATOR_HEIGHT,
-        borderBottomColor:  'gray',
+        height: dimens.SEPARATOR_HEIGHT,
+        backgroundColor:  'gray',
     },
     contentStyle:{
         flexDirection: 'row',
