@@ -268,29 +268,28 @@ class PublicCompoennt extends Component{
      * 左边内容
      */
      renderLeft = () => {
-        let component;
-        if (this.props.hiddenLeft) {
-            return(
-              <View style={{width: barBtnWidth}}/>
+        let IsTouchComponent = this.props.onLeftPress  ? TouchableOpacity : View;
+        if(this.props.hiddenLeft){
+
+            return (
+                <IsTouchComponent style={[styles.leftComponentStyle, this.props.leftComponentStyle]} hitSlop={{top:13,bottom: 13, left: 0,right: 0}}  onPress={this.props.onLeftPress}>
+                        <View style={{width: barBtnWidth}}/>
+                </IsTouchComponent>
             )
-        }
-        component = (
-            <View style={[styles.leftComponentStyle, this.props.leftComponentStyle]}>
+        }else{
+            return(
+
+                <IsTouchComponent style={[styles.leftComponentStyle, this.props.leftComponentStyle]} hitSlop={{top:13,bottom: 13, left: 0,right: 0}}  onPress={this.props.onLeftPress}>
                 {
                     this.props.leftIcon && <Image  style={[styles.leftIconStyle, this.props.leftIconStyle]} source={this.props.leftIcon}/>
                 }
                 {
                     this.props.leftText &&  <Text  style={[styles.leftTextStyle, this.props.leftTextStyle]}> {this.props.leftText} </Text> 
                 }
-            </View>
-        )
-        let IsTouchComponent = this.props.onLeftPress  ? TouchableOpacity : View;
+                </IsTouchComponent>
+            )
+        }
         
-        return (
-            <IsTouchComponent style={[{flex:1},this.props.leftComponentStyle]} hitSlop={{top:13,bottom: 13, left: 0,right: 0}}  onPress={this.props.onLeftPress}>
-                {component} 
-            </IsTouchComponent>
-        )
     }
 
      renderCneter = () => {
@@ -305,45 +304,38 @@ class PublicCompoennt extends Component{
         );
     };
      renderRight = () => {
-        let component;
         if (this.props.hiddenRight) {
             return(
                 <View style={{width: barBtnWidth}}/>
             )
+        }else{
+            let IsTouchComponent = this.props.onRightPress ? TouchableOpacity : View;
+            return (
+                <IsTouchComponent style={[styles.rightComponentStyle,this.props.rightComponentStyle]} hitSlop={{top:13,bottom: 13, left: 0,right: 16}}  onPress={this.props.onRightPress}>
+                    {
+                        this.props.rightIcon && <Image  style={[styles.rightIconStyle, this.props.rightIconStyle]} source={this.props.rightIcon}/>
+                    }
+                    {
+                        this.props.rightText &&  <Text style={[styles.rightTextStyle, this.props.rightTextStyle]}>{this.props.rightText}</Text> 
+                    }
+                    {
+                        this.props.isRightArrowShow  && <Image style={[styles.rightArrowStyle, this.props.rightArrowStyle]} source={this.props.rightArrow || require('./rightArrow.png')}/> 
+                    }
+                </IsTouchComponent>
+            )
         }
-        component = (
-            <View style={[styles.rightComponentStyle, this.props.rightComponentStyle]}>
-                {
-                    this.props.rightIcon && <Image  style={[styles.rightIconStyle, this.props.rightIconStyle]} source={this.props.rightIcon}/>
-                }
-                {
-                    this.props.rightText &&  <Text style={[styles.rightTextStyle, this.props.rightTextStyle]}>{this.props.rightText}</Text> 
-                }
-                {
-                    this.props.isRightArrowShow  && <Image style={[styles.rightArrowStyle, this.props.rightArrowStyle]} source={this.props.rightArrow || require('./rightArrow.png')}/> 
-                }
-            </View>
-        )
-            
-        let IsTouchComponent = this.props.onRightPress ? TouchableOpacity : View;
-    
-        return (
-            <IsTouchComponent style={[{flex:1}, this.props.rightComponentStyle]} hitSlop={{top:13,bottom: 13, left: 0,right: 16}}  onPress={this.props.onRightPress}>
-                {component} 
-            </IsTouchComponent>
-        )
     }
     render(){
         let IsTouchComponent = this.props.onPress  ? TouchableOpacity : View;
         return (
             <View style={[styles.container, this.props.containerStyle]}>
                 {
-                   !this.props.hiddenTopLine &&  <View style={[styles.topLine, {marginLeft:  this.props.topLineLeftMargin, marginRight: this.props.topLineRightMargin}, this.props.topLineStyle]}/>
+                    !this.props.hiddenTopLine && <View style={[styles.topLine, {marginLeft:  this.props.topLineLeftMargin, marginRight: this.props.topLineRightMargin}, this.props.topLineStyle]}/>
                 }
                 <IsTouchComponent style={[styles.contentStyle]} onPress={this.props.onPress}>
-                    { !this.props.removeLeftView && (this.props.leftComponent || this.renderLeft())}
+                    {!this.props.removeLeftView && (this.props.leftComponent || this.renderLeft())}
                     {!this.props.removeCenterView && (this.props.centerText ? this.renderCneter() : this.props.centerContent) }
-                    {!this.props.removeRightView && (this.props.rightComponent || this.renderRight())}
+                    {!this.props.removeRightView  && (this.props.rightComponent || this.renderRight())}
                 </IsTouchComponent>
                 {
                     !this.props.hiddenBottomLine && <View style={[styles.bottomLine, {marginLeft:  this.props.bottomLineLeftMargin, marginRight: this.props.bottomLineRightMargin}, this.props.bottomLineStyle]}/>
@@ -371,6 +363,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     leftComponentStyle: {
+        flex:1,
         flexDirection: 'row',
         paddingLeft: 16,
         paddingVertical: 12,
@@ -398,6 +391,7 @@ const styles = StyleSheet.create({
     },
 
     rightComponentStyle: {
+        flex:1,
         flexDirection: 'row',
         justifyContent: 'flex-end',
         paddingRight: 16,
