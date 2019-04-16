@@ -14,7 +14,7 @@ import {
   ScrollView
 } from 'react-native';
 
-import {PublicCompoennt, dimens} from 'react-native-public-component'
+import {PublicCompoennt, dimens} from './react-native-public-component'
 
 export default class App extends Component {
   render() {
@@ -22,89 +22,89 @@ export default class App extends Component {
       <ScrollView contentContainerStyle={styles.container}>
         <PublicCompoennt leftText="刘成"    />
 
-        <PublicCompoennt
-          leftText="不带箭头"
-          isRightArrowShow={false}
+        <PublicCompoennt 
+          leftText="不带箭头"  
+          isRightArrowShow={false} 
           containerStyle={styles.mv10}/>
 
         <PublicCompoennt leftText="带下划线"  bottomLineLeftMargin={0}  />
 
-        <PublicCompoennt
-          leftText="上下划线"
-          bottomLineLeftMargin={0}
-          hiddenTopLine={false}
+        <PublicCompoennt 
+          leftText="上下划线"  
+          bottomLineLeftMargin={0} 
+          hiddenTopLine={false} 
           containerStyle={styles.mv10} />
 
-        <PublicCompoennt
-          leftText="左侧文字，右侧箭头带下划线"
+        <PublicCompoennt 
+          leftText="左侧文字，右侧箭头带下划线"  
           leftTextStyle={styles.leftTextStyle}
         />
 
-        <PublicCompoennt
-          leftText="左侧文字 右侧图片"
+        <PublicCompoennt 
+          leftText="左侧文字 右侧图片"  
           leftTextStyle={styles.leftTextStyle}
           rightIcon={require('./images/head_default.png')}
           rightIconStyle={styles.rightIconStyle1}
-          containerStyle={styles.mv10}
+          containerStyle={styles.mv10} 
         />
 
-        <PublicCompoennt
-          leftText="左侧文字图片 右侧图片"
+        <PublicCompoennt 
+          leftText="左侧文字图片 右侧图片"  
           leftTextStyle={styles.leftTextStyle}
           rightIcon={require('./images/head_default.png')}
           leftIcon={require('./images/head_default.png')}
           leftIconStyle={styles.rightIconStyle1}
           rightIconStyle={styles.rightIconStyle1}
-          containerStyle={styles.mv10}
+          containerStyle={styles.mv10} 
         />
 
-        <PublicCompoennt
-          leftText="左侧文字图片 右侧文字图片"
+        <PublicCompoennt 
+          leftText="左侧文字图片 右侧文字图片"  
           rightText="右侧文字"
           leftTextStyle={styles.leftTextStyle}
           rightTextStyle={styles.leftTextStyle}
           leftComponentStyle={styles.flex2}
           rightIcon={require('./images/head_default.png')}
           leftIcon={require('./images/head_default.png')}
-          isRightArrowShow={false}
+          isRightArrowShow={false} 
           hiddenBottomLine={true}
           leftIconStyle={styles.rightIconStyle1}
           rightIconStyle={styles.rightIconStyle1}
-          containerStyle={styles.mv10}
+          containerStyle={styles.mv10} 
         />
 
         <PublicCompoennt leftText="账号"leftTextStyle={{color:'red'}} rightComponent={this.rightLogin()} />
-
+          
         <PublicCompoennt leftText="左侧" centerText="中间" rightText="右侧" containerStyle={styles.mv10} />
 
-        <PublicCompoennt
-          leftText="左侧"
+        <PublicCompoennt 
+          leftText="左侧"  
           rightText="右侧"
-          centerText="中间"
+          centerText="中间" 
           rightComponentStyle={{paddinright}}
           leftTextStyle={styles.leftTextStyle}
           rightTextStyle={styles.leftTextStyle}
           rightIcon={require('./images/head_default.png')}
           leftIcon={require('./images/head_default.png')}
-          isRightArrowShow={false}
+          isRightArrowShow={false} 
           hiddenBottomLine={true}
           leftIconStyle={styles.rightIconStyle1}
           rightIconStyle={styles.rightIconStyle1}
-          containerStyle={styles.mv10}
+          containerStyle={styles.mv10} 
         />
-
+        
       </ScrollView>
     );
 
   }
   rightLogin=()=>(
     <View style={{flex:1}}>
-    <TextInput
+    <TextInput 
       style={[styles.textinput]}
-      placeholder = "请输入姓名"
-        blurOnSubmit= {false}
+      placeholder = "请输入姓名" 
+        blurOnSubmit= {false} 
       placeholderTextColor='#bbbbbb'
-      underlineColorAndroid="transparent"
+      underlineColorAndroid="transparent" 
       returnKeyType='next'
       clearButtonMode='never'/>
     </View>

@@ -1,5 +1,5 @@
 /**
- * author: liucheng 
+ * author: liucheng
  * e-mail: 674668211@qq.com
  * instructions: 此页面为公共组件，左侧可以为图片 文字 ，右侧为文字 输入框 箭头
  *               可以自定义左侧点击事件、右侧点击事件、显示左侧图片、显示右侧图片、右侧箭头
@@ -97,6 +97,11 @@ class PublicCompoennt extends Component{
          * @type {Boolean, number}number为const引入的
         */
         isRightArrowShow: PropTypes.bool,
+        /**
+         * 右侧箭头组件
+         * right arrow compoent
+         */
+        rightArrowComponent:PropTypes.node,
         /**
          * 左侧图标样式
          * left icon styles
@@ -250,7 +255,7 @@ class PublicCompoennt extends Component{
         bottomLineRightMargin: PropTypes.number,
     }
 
-    static defaultProps = { 
+    static defaultProps = {
         isRightArrowShow: true,
         hiddenBottomLine: false,
         hiddenTopLine : true,
@@ -263,7 +268,7 @@ class PublicCompoennt extends Component{
         bottomLineLeftMargin: 15
     }
 
-  
+
     /**
      * 左边内容
      */
@@ -284,17 +289,17 @@ class PublicCompoennt extends Component{
                     this.props.leftIcon && <Image  style={[styles.leftIconStyle, this.props.leftIconStyle]} source={this.props.leftIcon}/>
                 }
                 {
-                    this.props.leftText &&  <Text  style={[styles.leftTextStyle, this.props.leftTextStyle]}> {this.props.leftText} </Text> 
+                    this.props.leftText &&  <Text  style={[styles.leftTextStyle, this.props.leftTextStyle]}> {this.props.leftText} </Text>
                 }
                 </IsTouchComponent>
             )
         }
-        
+
     }
 
      renderCneter = () => {
         const IsTouchComponent = this.props.onCenterPress  ? TouchableOpacity : View;
-        
+
         return (
           <IsTouchComponent style={[styles.centerContentStyle,{flex: 2}, this.props.centerContentStyle]} onPress={this.props.onCenterPress}>
             <Text style={[styles.centerTextStyle, this.props.centerTextStyle]} >
@@ -316,10 +321,13 @@ class PublicCompoennt extends Component{
                         this.props.rightIcon && <Image  style={[styles.rightIconStyle, this.props.rightIconStyle]} source={this.props.rightIcon}/>
                     }
                     {
-                        this.props.rightText &&  <Text style={[styles.rightTextStyle, this.props.rightTextStyle]}>{this.props.rightText}</Text> 
+                        this.props.rightText &&  <Text style={[styles.rightTextStyle, this.props.rightTextStyle]}>{this.props.rightText}</Text>
                     }
                     {
-                        this.props.isRightArrowShow  && <Image style={[styles.rightArrowStyle, this.props.rightArrowStyle]} source={this.props.rightArrow || require('./rightArrow.png')}/> 
+                        this.props.isRightArrowShow  ?
+                        this.props.rightArrowComponent ||
+                        <Image style={[styles.rightArrowStyle, this.props.rightArrowStyle]} source={this.props.rightArrow || require('./rightArrow.png')}/>
+                        : null
                     }
                 </IsTouchComponent>
             )
@@ -365,7 +373,7 @@ const styles = StyleSheet.create({
     leftComponentStyle: {
         flex:1,
         flexDirection: 'row',
-        paddingLeft: 16,
+        paddingLeft: 15,
         paddingVertical: 12,
         alignItems:'center',
     },
@@ -394,7 +402,7 @@ const styles = StyleSheet.create({
         flex:1,
         flexDirection: 'row',
         justifyContent: 'flex-end',
-        paddingRight: 16,
+        paddingRight: 15,
         paddingVertical: 13,
         alignItems:'center',
     },
