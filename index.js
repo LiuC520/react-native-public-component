@@ -7,20 +7,13 @@
  */
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {
-    Platform,
-    StyleSheet,
-    Text,
-    Image,
-    View,
-    TouchableOpacity,
-} from 'react-native';
+import {StyleSheet, Text, Image, View, TouchableOpacity} from 'react-native';
 
-import  dimens  from './dimens';
+import dimens from './dimens';
 
 const barBtnWidth = 40;
-class PublicCompoennt extends Component{
-    constructor(props){
+class PublicCompoennt extends Component {
+    constructor(props) {
         super(props);
     }
 
@@ -72,19 +65,19 @@ class PublicCompoennt extends Component{
          * left icon
          * @type {Object, number}number为require引入
         */
-        leftIcon:  PropTypes.oneOfType([PropTypes.object, PropTypes.number]),
+        leftIcon: PropTypes.oneOfType([PropTypes.object, PropTypes.number]),
         /**
          * 右侧图标
          * right icon
          * @type {Object, number}number为require引入
         */
-        rightIcon:  PropTypes.oneOfType([PropTypes.object, PropTypes.number]),
+        rightIcon: PropTypes.oneOfType([PropTypes.object, PropTypes.number]),
         /**
          * 右侧箭头
          * right arrow
          * @type {Object, number}number为require引入
         */
-        rightArrow:  PropTypes.oneOfType([PropTypes.object, PropTypes.number]),
+        rightArrow: PropTypes.oneOfType([PropTypes.object, PropTypes.number]),
         /**
          * 右侧箭头样式
          * right arrow styles
@@ -101,7 +94,7 @@ class PublicCompoennt extends Component{
          * 右侧箭头组件
          * right arrow compoent
          */
-        rightArrowComponent:PropTypes.node,
+        rightArrowComponent: PropTypes.node,
         /**
          * 左侧图标样式
          * left icon styles
@@ -252,15 +245,15 @@ class PublicCompoennt extends Component{
          *   bottom line rightMargin
          * @type {Number}
         */
-        bottomLineRightMargin: PropTypes.number,
+        bottomLineRightMargin: PropTypes.number
     }
 
     static defaultProps = {
         isRightArrowShow: true,
         hiddenBottomLine: false,
-        hiddenTopLine : true,
+        hiddenTopLine: true,
         hiddenLeft: false,
-        hiddenRight:false,
+        hiddenRight: false,
         removeCenterView: false,
         removeLeftView: false,
         removeRightView: false,
@@ -268,120 +261,193 @@ class PublicCompoennt extends Component{
         bottomLineLeftMargin: 15
     }
 
-
     /**
      * 左边内容
      */
-     renderLeft = () => {
-        let IsTouchComponent = this.props.onLeftPress  ? TouchableOpacity : View;
-        if(this.props.hiddenLeft){
+    renderLeft = () => {
+        let IsTouchComponent = this.props.onLeftPress
+            ? TouchableOpacity
+            : View;
+        if (this.props.hiddenLeft) {
 
             return (
-                <IsTouchComponent style={[styles.leftComponentStyle, this.props.leftComponentStyle]} hitSlop={{top:13,bottom: 13, left: 0,right: 0}}  onPress={this.props.onLeftPress}>
-                        <View style={{width: barBtnWidth}}/>
+                <IsTouchComponent
+                    style={[styles.leftComponentStyle, this.props.leftComponentStyle]}
+                    hitSlop={{
+                    top: 13,
+                    bottom: 13,
+                    left: 0,
+                    right: 0
+                }}
+                    onPress={this.props.onLeftPress}>
+                    <View
+                        style={{
+                        width: barBtnWidth
+                    }}/>
                 </IsTouchComponent>
             )
-        }else{
-            return(
+        } else {
+            return (
 
-                <IsTouchComponent style={[styles.leftComponentStyle, this.props.leftComponentStyle]} hitSlop={{top:13,bottom: 13, left: 0,right: 0}}  onPress={this.props.onLeftPress}>
-                {
-                    this.props.leftIcon && <Image  style={[styles.leftIconStyle, this.props.leftIconStyle]} source={this.props.leftIcon}/>
-                }
-                {
-                    this.props.leftText &&  <Text  style={[styles.leftTextStyle, this.props.leftTextStyle]}> {this.props.leftText} </Text>
-                }
+                <IsTouchComponent
+                    style={[styles.leftComponentStyle, this.props.leftComponentStyle]}
+                    hitSlop={{
+                    top: 13,
+                    bottom: 13,
+                    left: 0,
+                    right: 0
+                }}
+                    onPress={this.props.onLeftPress}>
+                    {this.props.leftIcon
+                        ? <Image
+                                style={[styles.leftIconStyle, this.props.leftIconStyle]}
+                                source={this.props.leftIcon}/>
+                        : null
+}
+                    {this.props.leftText
+                        ? <Text style={[styles.leftTextStyle, this.props.leftTextStyle]}>{this.props.leftText}</Text>
+                        : null
+}
                 </IsTouchComponent>
             )
         }
 
     }
 
-     renderCneter = () => {
-        const IsTouchComponent = this.props.onCenterPress  ? TouchableOpacity : View;
+    renderCneter = () => {
+        const IsTouchComponent = this.props.onCenterPress
+            ? TouchableOpacity
+            : View;
 
         return (
-          <IsTouchComponent style={[styles.centerContentStyle,{flex: 2}, this.props.centerContentStyle]} onPress={this.props.onCenterPress}>
-            <Text style={[styles.centerTextStyle, this.props.centerTextStyle]} >
-              { this.props.centerText }
-            </Text>
-          </IsTouchComponent>
+            <IsTouchComponent
+                style={[
+                styles.centerContentStyle, {
+                    flex: 2
+                },
+                this.props.centerContentStyle
+            ]}
+                onPress={this.props.onCenterPress}>
+                <Text style={[styles.centerTextStyle, this.props.centerTextStyle]}>
+                    {this.props.centerText}
+                </Text>
+            </IsTouchComponent>
         );
     };
-     renderRight = () => {
+    renderRight = () => {
         if (this.props.hiddenRight) {
-            return(
-                <View style={{width: barBtnWidth}}/>
-            )
-        }else{
-            let IsTouchComponent = this.props.onRightPress ? TouchableOpacity : View;
+            return (<View style={{
+                width: barBtnWidth
+            }}/>)
+        } else {
+            let IsTouchComponent = this.props.onRightPress
+                ? TouchableOpacity
+                : View;
             return (
-                <IsTouchComponent style={[styles.rightComponentStyle,this.props.rightComponentStyle]} hitSlop={{top:13,bottom: 13, left: 0,right: 16}}  onPress={this.props.onRightPress}>
-                    {
-                        this.props.rightIcon && <Image  style={[styles.rightIconStyle, this.props.rightIconStyle]} source={this.props.rightIcon}/>
-                    }
-                    {
-                        this.props.rightText &&  <Text style={[styles.rightTextStyle, this.props.rightTextStyle]}>{this.props.rightText}</Text>
-                    }
-                    {
-                        this.props.isRightArrowShow  ?
-                        this.props.rightArrowComponent ||
-                        <Image style={[styles.rightArrowStyle, this.props.rightArrowStyle]} source={this.props.rightArrow || require('./rightArrow.png')}/>
+                <IsTouchComponent
+                    style={[styles.rightComponentStyle, this.props.rightComponentStyle]}
+                    hitSlop={{
+                    top: 13,
+                    bottom: 13,
+                    left: 0,
+                    right: 16
+                }}
+                    onPress={this.props.onRightPress}>
+                    {this.props.rightIcon
+                        ? <Image
+                                style={[styles.rightIconStyle, this.props.rightIconStyle]}
+                                source={this.props.rightIcon}/>
                         : null
-                    }
+}
+                    {this.props.rightText
+                        ? <Text style={[styles.rightTextStyle, this.props.rightTextStyle]}>{this.props.rightText}</Text>
+                        : null
+}
+                    {this.props.isRightArrowShow
+                        ? this.props.rightArrowComponent || <Image
+                                style={[styles.rightArrowStyle, this.props.rightArrowStyle]}
+                                source={this.props.rightArrow || require('./rightArrow.png')}/>
+                        : null
+}
                 </IsTouchComponent>
             )
         }
     }
-    render(){
-        let IsTouchComponent = this.props.onPress  ? TouchableOpacity : View;
+    render() {
+        let IsTouchComponent = this.props.onPress
+            ? TouchableOpacity
+            : View;
         return (
             <View style={[styles.container, this.props.containerStyle]}>
-                {
-                    !this.props.hiddenTopLine && <View style={[styles.topLine, {marginLeft:  this.props.topLineLeftMargin, marginRight: this.props.topLineRightMargin}, this.props.topLineStyle]}/>
-                }
+                {!this.props.hiddenTopLine
+                    ? <View
+                            style={[
+                            styles.topLine, {
+                                marginLeft: this.props.topLineLeftMargin,
+                                marginRight: this.props.topLineRightMargin
+                            },
+                            this.props.topLineStyle
+                        ]}/>
+                    : null
+}
                 <IsTouchComponent style={[styles.contentStyle]} onPress={this.props.onPress}>
-                    {!this.props.removeLeftView && (this.props.leftComponent || this.renderLeft())}
-                    {!this.props.removeCenterView && (this.props.centerText ? this.renderCneter() : this.props.centerContent) }
-                    {!this.props.removeRightView  && (this.props.rightComponent || this.renderRight())}
+                    {!this.props.removeLeftView
+                        ? (this.props.leftComponent || this.renderLeft())
+                        : null}
+                    {!this.props.removeCenterView
+                        ? (this.props.centerText
+                            ? this.renderCneter()
+                            : this.props.centerContent)
+                        : null}
+                    {!this.props.removeRightView
+                        ? (this.props.rightComponent || this.renderRight())
+                        : null}
                 </IsTouchComponent>
-                {
-                    !this.props.hiddenBottomLine && <View style={[styles.bottomLine, {marginLeft:  this.props.bottomLineLeftMargin, marginRight: this.props.bottomLineRightMargin}, this.props.bottomLineStyle]}/>
-                }
+                {!this.props.hiddenBottomLine
+                    ? <View
+                            style={[
+                            styles.bottomLine, {
+                                marginLeft: this.props.bottomLineLeftMargin,
+                                marginRight: this.props.bottomLineRightMargin
+                            },
+                            this.props.bottomLineStyle
+                        ]}/>
+                    : null
+}
             </View>
         )
     }
 }
 
 const styles = StyleSheet.create({
-    container:{
+    container: {
         backgroundColor: 'white',
         width: dimens.width
     },
     topLine: {
         height: dimens.SEPARATOR_HEIGHT,
-        backgroundColor: 'gray',
+        backgroundColor: 'gray'
     },
     bottomLine: {
         height: dimens.SEPARATOR_HEIGHT,
-        backgroundColor:  'gray',
+        backgroundColor: 'gray'
     },
-    contentStyle:{
+    contentStyle: {
         flexDirection: 'row',
-        alignItems: 'center',
+        alignItems: 'center'
     },
     leftComponentStyle: {
-        flex:1,
+        flex: 1,
         flexDirection: 'row',
         paddingLeft: 15,
         paddingVertical: 12,
-        alignItems:'center',
+        alignItems: 'center'
     },
     leftIconStyle: {
         width: 20,
         height: 20,
         resizeMode: 'contain',
-        marginRight: 5,
+        marginRight: 5
     },
     leftTextStyle: {
         fontSize: dimens.normalize(16),
@@ -389,7 +455,7 @@ const styles = StyleSheet.create({
     },
     centerContentStyle: {
         justifyContent: 'center',
-        alignItems: 'center',
+        alignItems: 'center'
     },
     centerTextStyle: {
         fontSize: dimens.normalize(16),
@@ -399,31 +465,30 @@ const styles = StyleSheet.create({
     },
 
     rightComponentStyle: {
-        flex:1,
+        flex: 1,
         flexDirection: 'row',
         justifyContent: 'flex-end',
         paddingRight: 15,
         paddingVertical: 13,
-        alignItems:'center',
+        alignItems: 'center'
     },
     rightIconStyle: {
         width: 20,
         height: 20,
         resizeMode: 'contain',
-        marginRight: 5,
+        marginRight: 5
     },
     rightTextStyle: {
         fontSize: dimens.normalize(16),
         color: 'black'
     },
-    rightArrowStyle:{
+    rightArrowStyle: {
         width: 8,
         height: 14,
-        resizeMode:'contain',
-        marginLeft: 5,
-    },
+        resizeMode: 'contain',
+        marginLeft: 5
+    }
 });
-
 
 module.exports = {
     PublicCompoennt,
