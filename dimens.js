@@ -37,20 +37,32 @@ module.exports = {
 
   /*屏幕尺寸*/
   height : width < height ? height : width,
+  getHeight : () => {
+    const { height, width } = Dimensions.get('window')
+    return width < height ? height : width
+  },
   width: width < height ? width : height,
+  getWidth: () => {
+    const { height, width } = Dimensions.get('window')
+    return width < height ? width : height
+  },
   
   /**fontsize adapter */
   normalize: (size) => {
+    const { height, width } = Dimensions.get('window')
+    const _width = width < height ? width : height
+    const _height = width < height ? height : width
+  
     if (pixelRatio >= 2 && pixelRatio < 3) {
       // iphone 5s and older Androids
-      if (width < 360) {
+      if (_width < 360) {
         return size * 0.95;
       }
       // iphone 5
-      if (height < 667) {
+      if (_height < 667) {
         return size;
         // iphone 6-6s
-      } else if (height >= 667 && height <= 735) {
+      } else if (_height >= 667 && _height <= 735) {
         return size * 1.15;
       }
       // older phablets
@@ -58,16 +70,16 @@ module.exports = {
     } else if (pixelRatio >= 3 && pixelRatio < 3.5) {
       // catch Android font scaling on small machines
       // where pixel ratio / font scale ratio => 3:3
-      if (width <= 360) {
+      if (_width <= 360) {
         return size;
       }
-      // Catch other weird android width sizings
-      if (height < 667) {
+      // Catch other weird android _width sizings
+      if (_height < 667) {
         return size * 1.15;
         // catch in-between size Androids and scale font up
         // a tad but not too much
       }
-      if (height >= 667 && height <= 735) {
+      if (_height >= 667 && _height <= 735) {
         return size * 1.2;
       }
       // catch larger devices
@@ -76,16 +88,16 @@ module.exports = {
     } else if (pixelRatio >= 3.5) {
       // catch Android font scaling on small machines
       // where pixel ratio / font scale ratio => 3:3
-      if (width <= 360) {
+      if (_width <= 360) {
         return size;
-        // Catch other smaller android height sizings
+        // Catch other smaller android _height sizings
       }
-      if (height < 667) {
+      if (_height < 667) {
         return size * 1.2;
         // catch in-between size Androids and scale font up
         // a tad but not too much
       }
-      if (height >= 667 && height <= 735) {
+      if (_height >= 667 && _height <= 735) {
         return size * 1.25;
       }
       // catch larger phablet devices

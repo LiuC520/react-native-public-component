@@ -1,4 +1,4 @@
-# React Native万能公用组件 最新版本1.0.8
+# React Native万能公用组件 最新版本1.0.10
 联系人：刘成，QQ&微信：674668211
 项目中总是会用到很多公共的组件，样式就跟设置里面的单个item很像，本项目就是打造一个公共的万能组件
 项目中有两个文件，一个是公用组件，一个是字体大小适配
@@ -9,6 +9,7 @@
 #### 项目中导入
 import {PublicCompoennt, dimens} from 'react-native-public-component'
 <PublicCompoennt leftText="刘成"    />
+
 #### 参数说明
 
 | props                 |                         说明                          |                     备注 |

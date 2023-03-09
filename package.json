@@ -1,11 +1,15 @@
 {
-  "name": "react-native-public-component",
-  "version": "1.0.8",
+  "author": {
+    "name": "Liu Cheng"
+  },
+  "bundleDependencies": false,
+  "deprecated": false,
   "description": "public component for react native",
+  "license": "MIT",
   "main": "index.js",
+  "name": "react-native-public-component",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Liu Cheng",
-  "license": "MIT"
+  "version": "1.0.10"
 }

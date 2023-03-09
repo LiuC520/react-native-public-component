@@ -23,7 +23,7 @@ class PublicCompoennt extends Component {
          * whole container styles , padding margin backgroundColor ...
          * @type {Object,number} number为const引入的
         */
-        containerStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.number]),
+        containerStyle: PropTypes.oneOfType([PropTypes.array, PropTypes.object, PropTypes.number]),
         /**
          * 自定义左侧组件
          * left custom component
@@ -47,19 +47,19 @@ class PublicCompoennt extends Component {
          * left container styles
          * @type {Object, number}number为const引入的
         */
-        leftComponentStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.number]),
+        leftComponentStyle: PropTypes.oneOfType([PropTypes.array, PropTypes.object, PropTypes.number]),
         /**
          * 中间组件样式
          * center container styles
          * @type {Object, number}number为const引入的
         */
-        centerContentStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.number]),
+        centerContentStyle: PropTypes.oneOfType([PropTypes.array, PropTypes.object, PropTypes.number]),
         /**
          * 右侧组件样式
          * right container styles
          * @type {Object, number}number为const引入的
         */
-        rightComponentStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.number]),
+        rightComponentStyle: PropTypes.oneOfType([PropTypes.array, PropTypes.object, PropTypes.number]),
         /**
          * 左侧图标
          * left icon
@@ -83,7 +83,7 @@ class PublicCompoennt extends Component {
          * right arrow styles
          * @type {Object, number}number为const引入的
         */
-        rightArrowStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.number]),
+        rightArrowStyle: PropTypes.oneOfType([PropTypes.array, PropTypes.object, PropTypes.number]),
         /**
          * 是否显示右侧箭头
          * whether show right arrow
@@ -100,13 +100,13 @@ class PublicCompoennt extends Component {
          * left icon styles
          * @type {Object, number}number为const引入的
         */
-        leftIconStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.number]),
+        leftIconStyle: PropTypes.oneOfType([PropTypes.array, PropTypes.object, PropTypes.number]),
         /**
          * 右侧图标样式
          * right icon styles
          * @type {Object, number}//number为require的文件
         */
-        rightIconStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.number]),
+        rightIconStyle: PropTypes.oneOfType([PropTypes.array, PropTypes.object, PropTypes.number]),
         /**
          * 左侧文字
          * left text
@@ -118,7 +118,7 @@ class PublicCompoennt extends Component {
          * left icon styles
          * @type {Object}
         */
-        leftTextStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.number]),
+        leftTextStyle: PropTypes.oneOfType([PropTypes.array, PropTypes.object, PropTypes.number]),
         /**
          * 中间文字
          * center text
@@ -130,7 +130,7 @@ class PublicCompoennt extends Component {
          * center text styles
          * @type {object, number}number为const引入的
         */
-        centerTextStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.number]),
+        centerTextStyle: PropTypes.oneOfType([PropTypes.array, PropTypes.object, PropTypes.number]),
         /**
          * 右侧文字
          * right text
@@ -142,7 +142,7 @@ class PublicCompoennt extends Component {
          * right text styles
          * @type {object, number}number为const引入的
         */
-        rightTextStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.number]),
+        rightTextStyle: PropTypes.oneOfType([PropTypes.array, PropTypes.object, PropTypes.number]),
         /**
          * 整个item点击
          *  the whole item on press
@@ -208,7 +208,7 @@ class PublicCompoennt extends Component {
          *   top line styles
          * @type {Object, number}number为const引入的
         */
-        topLineStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.number]),
+        topLineStyle: PropTypes.oneOfType([PropTypes.array, PropTypes.object, PropTypes.number]),
         /**
          * 上划线的左边距
          *   top line leftMargin
@@ -232,7 +232,7 @@ class PublicCompoennt extends Component {
          *   bottom line styles
          * @type {Object, number}number为const引入的
         */
-        bottomLineStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.number]),
+        bottomLineStyle: PropTypes.oneOfType([PropTypes.array, PropTypes.object, PropTypes.number]),
 
         /**
          * 底部下划线左侧边距
@@ -305,7 +305,9 @@ class PublicCompoennt extends Component {
                         : null
 }
                     {this.props.leftText
-                        ? <Text style={[styles.leftTextStyle, this.props.leftTextStyle]}>{this.props.leftText}</Text>
+                        ? <Text style={[styles.leftTextStyle, {
+                            fontSize: dimens.normalize(16),
+                        }, this.props.leftTextStyle]}>{this.props.leftText}</Text>
                         : null
 }
                 </IsTouchComponent>
@@ -328,7 +330,9 @@ class PublicCompoennt extends Component {
                 this.props.centerContentStyle
             ]}
                 onPress={this.props.onCenterPress}>
-                <Text style={[styles.centerTextStyle, this.props.centerTextStyle]}>
+                <Text style={[styles.centerTextStyle, {
+                    fontSize: dimens.normalize(16),
+                }, this.props.centerTextStyle]}>
                     {this.props.centerText}
                 </Text>
             </IsTouchComponent>
@@ -360,7 +364,9 @@ class PublicCompoennt extends Component {
                         : null
 }
                     {this.props.rightText
-                        ? <Text style={[styles.rightTextStyle, this.props.rightTextStyle]}>{this.props.rightText}</Text>
+                        ? <Text style={[styles.rightTextStyle, {
+                            fontSize: dimens.normalize(16),
+                        }, this.props.rightTextStyle]}>{this.props.rightText}</Text>
                         : null
 }
                     {this.props.isRightArrowShow
@@ -377,8 +383,9 @@ class PublicCompoennt extends Component {
         let IsTouchComponent = this.props.onPress
             ? TouchableOpacity
             : View;
+        const width = dimens.getWidth()
         return (
-            <View style={[styles.container, this.props.containerStyle]}>
+            <View style={[styles.container, { width }, this.props.containerStyle]}>
                 {!this.props.hiddenTopLine
                     ? <View
                             style={[
@@ -422,7 +429,6 @@ class PublicCompoennt extends Component {
 const styles = StyleSheet.create({
     container: {
         backgroundColor: 'white',
-        width: dimens.width
     },
     topLine: {
         height: dimens.SEPARATOR_HEIGHT,
@@ -450,7 +456,6 @@ const styles = StyleSheet.create({
         marginRight: 5
     },
     leftTextStyle: {
-        fontSize: dimens.normalize(16),
         color: 'black'
     },
     centerContentStyle: {
@@ -458,7 +463,6 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     centerTextStyle: {
-        fontSize: dimens.normalize(16),
         color: 'black',
         textAlign: 'center',
         fontWeight: 'bold'
@@ -479,7 +483,6 @@ const styles = StyleSheet.create({
         marginRight: 5
     },
     rightTextStyle: {
-        fontSize: dimens.normalize(16),
         color: 'black'
     },
     rightArrowStyle: {
